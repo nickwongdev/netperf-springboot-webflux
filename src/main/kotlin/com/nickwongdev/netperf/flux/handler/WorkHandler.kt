@@ -49,7 +49,7 @@ class WorkHandler @Autowired constructor(
 		val iterations = workService.work(iter, cMin, cMax, wMin, wMax)
 
 		// Check to make sure iterations happened
-		if (iterations < 100) {
+		if (iterations < 1) {
 			throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Your request parameters did not result in enough iterations")
 		}
 
