@@ -10,19 +10,14 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.router
 
 /**
- * Work Router
+ * Router for the Application
  */
 @Configuration
 class AppRouter @Autowired constructor(private val workHandler: WorkHandler) {
 
 	@Bean
 	fun workRouter() = router {
-		(POST("/work") and accept(MediaType.APPLICATION_JSON_UTF8)).invoke {
-			// Switch to coroutines as soon as possible
-			GlobalScope.mono {
-				workHandler.work(it)
-			}
-		}
+		(POST("/work") and accept(MediaType.APPLICATION_JSON_UTF8)).invoke { GlobalScope.mono { workHandler.work(it) } }
 	}
 }
 
